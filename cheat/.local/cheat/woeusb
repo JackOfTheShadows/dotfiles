@@ -1,0 +1,2 @@
+# making a windows usb
+sudo woeusb --target-filesystem NTFS --device image.iso /dev/sdX

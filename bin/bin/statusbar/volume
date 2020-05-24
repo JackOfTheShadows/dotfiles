@@ -1,0 +1,27 @@
+#!/bin/sh
+
+# Source: https://unix.stackexchange.com/questions/132230/
+# read-out-pulseaudio-volume-from-commandline-i-want-pactl-get-sink-volume
+# Get the index of the selected sink:
+getsink() {
+        pacmd list-sinks |
+                awk '/index:/{i++} /* index:/{print i; exit}'
+}
+# Get the selected sink volume
+
+getvolume() {
+	pacmd list-sinks |
+                awk '/^\svolume:/{i++} i=='$(getsink)'{print $5; exit}'
+
+}
+
+mute=$(pacmd list-sinks | awk '/^\smuted:/{i++} i=='$(getsink)'{print $2; exit}')
+
+#if [ "$mute" == "yes" ]
+if [ "$mute" = "yes" ]; then
+	echo "Vol: MUTED"
+else
+#	echo -n "Vol: "
+	echo -n "♪"
+	getvolume
+fi;

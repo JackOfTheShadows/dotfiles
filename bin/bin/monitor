@@ -1,0 +1,30 @@
+#! /bin/bash
+
+#Source: https://frdmtoplay.com/i3-udev-xrandr-hotplugging-output-switching/
+
+###TODO does not work on connect:debug
+#HDMI_STATUS1=$(</sys/class/drm/card0/card0-HDMI-A-1/status )
+#HDMI_STATUS2=$(</sys/class/drm/card0/card0-HDMI-A-2/status )
+#VGA_STATUS=$(</sys/class/drm/card0/card0-VGA-1/status )
+#DP_STATUS1=$(</sys/class/drm/card0/card0-DP-1/status )
+#DP_STATUS2=$(</sys/class/drm/card0/card0-DP-2/status )
+#DP_STATUS3=$(</sys/class/drm/card0/card0-DP-3/status )
+
+#if [ "connected" == "$HDMI_STATUS2" ]; then
+#	xrandr --output VGA-1 --off --output LVDS-1 --off --output HDMI-3 --off --output HDMI-1 --off --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-3 --off --output DP-2 --off --output DP-1 --off
+#else
+#	xrandr --output VGA-1 --off --output LVDS-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off
+#	exit
+#fi
+
+## Old code
+for output in $(xrandr | grep '\Wconnected' | awk '{ print $1 }'); do
+    if [[ $output =~ ^HDMI.*$ ]]; then
+		xrandr --output VGA-1 --off --output LVDS-1 --off --output HDMI-3 --off --output HDMI-1 --off --output HDMI-2 --mode 1920x1080 --pos 0x0 --rotate normal --output DP-3 --off --output DP-2 --off --output DP-1 --off
+		exit
+    fi
+done
+
+xrandr --output VGA-1 --off --output LVDS-1 --primary --mode 1366x768 --pos 0x0 --rotate normal --output HDMI-3 --off --output HDMI-2 --off --output HDMI-1 --off --output DP-3 --off --output DP-2 --off --output DP-1 --off
+
+

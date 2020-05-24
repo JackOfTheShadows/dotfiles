@@ -1,0 +1,29 @@
+# i3blocks config file
+#
+# Please see man i3blocks for a complete reference!
+# The man page is also hosted at http://vivien.github.io/i3blocks
+#
+# Global properties
+#
+# The top properties below are applied to every block, but can be overridden.
+# Each block command defaults to the script name to avoid boilerplate.
+command=~/bin/statusbar/$BLOCK_NAME
+separator_block_width=15
+markup=none
+
+[volume]
+interval=1
+color=#fabd2f
+
+[language-show]
+interval=1
+color=#b8bb26
+
+[battery-show]
+interval=30
+color=#b8bb26
+
+[time]
+command=date '+%H:%M'
+interval=5
+color=#b8bb26

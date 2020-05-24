@@ -1,0 +1,6 @@
+#extract pages
+#If you wanted pages 1 through 5 from infile.pdf but you wanted the rest of the metadata to be dropped, you could instead run
+qpdf --empty --pages infile.pdf 1-5 -- outfile.pdf
+
+#This preserves all metadata associated with that file.
+qpdf input.pdf --pages . 1-10 -- output.pdf

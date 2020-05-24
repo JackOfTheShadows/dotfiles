@@ -1,0 +1,4 @@
+# merge pdfs
+pdfunite file1.pdf file2.pdf merged_output.pdf
+
+#installation through poppler-utils

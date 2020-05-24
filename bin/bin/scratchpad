@@ -1,0 +1,7 @@
+#!/bin/bash
+
+tmux new-session -d -s sp 'ranger'
+tmux new-window 'offlineimap'
+tmux new-window 'mutt'
+tmux select-window -t sp:1
+tmux attach -t 'sp'

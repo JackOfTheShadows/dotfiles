@@ -1,0 +1,8 @@
+# Source: https://askubuntu.com/questions/6723/change-folder-permissions-and-ownership
+# Own everything inside the folder and the folder itself
+sudo chown -R $USER ~/.blabla
+
+sudo chown -R username:group directory
+
+# set hdd
+sudo chown user:user -R folder/

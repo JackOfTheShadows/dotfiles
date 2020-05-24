@@ -1,0 +1,13 @@
+# install
+sudo apt-get install smartmontools
+
+# get info
+sudo smartctl -c /dev/sdX
+
+#tests
+sudo smartctl -t short /dev/sdX
+sudo smartctl -t long /dev/sdX
+sudo smartctl -t conveyance /dev/sdX
+
+#result
+sudo smartctl -H /dev/sdX

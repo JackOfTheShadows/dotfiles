@@ -1,0 +1,2 @@
+#!/bin/bash
+chromium-browser https://www.example.com https://github.com --user-data-dir=$HOME/path/to/dir

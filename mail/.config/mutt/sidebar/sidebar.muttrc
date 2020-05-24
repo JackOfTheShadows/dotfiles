@@ -1,0 +1,19 @@
+# requires sidebar patch for mutt
+set sidebar_visible = yes
+set sidebar_width = 25
+#set sort_sidebar = desc
+#set sidebar_delim = '|'
+color sidebar_new yellow default
+
+bind index,pager \CP sidebar-prev
+bind index,pager \CN sidebar-next
+bind index,pager \CO sidebar-open
+#bind index,pager \CU sidebar-scroll-up
+#bind index,pager \CD sidebar-scroll-down
+
+# macro index,pager b '<enter-command>toggle sidebar_visible<enter>'
+macro index b '<enter-command>toggle sidebar_visible<enter><refresh>'
+macro pager b '<enter-command>toggle sidebar_visible<enter><redraw-screen>'
+
+# always show X number of mails in the index
+set pager_index_lines = 6

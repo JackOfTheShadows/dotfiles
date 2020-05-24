@@ -1,0 +1,64 @@
+[general]
+#ui = ttyui
+accounts = example1,example2
+maxsyncaccounts = 3
+# Path to file with arbitrary Python code to be loaded
+pythonfile = ~/.config/offlineimap/offlineimap.py
+
+[Account example1]
+localrepository = example1-local
+remoterepository = example1-remote
+# full refresh, in min
+autorefresh = 0.5
+# quick refreshs between each full refresh
+quick = 10
+
+[Repository example1-local]
+type = Maildir
+localfolders = ~/path/to/Mail/example1x
+# delete remote mails that were deleted locally
+sync_deletes = yes
+
+[Repository example1-remote]
+type = IMAP
+remoteport = 993
+remotehost = imap.example1.org
+remoteuser = username@example1.org
+remotepasseval = get_passgpg("example1")
+keepalive = 60
+holdconnectionopen = yes
+# delete local mails that were deleted on the remote server
+expunge = yes
+# sync only these folders
+#folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent', 'Spam', 'Drafts']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
+
+[Account example2]
+localrepository = example2-local
+remoterepository = example2-remote
+# full refresh, in min
+autorefresh = 0.5
+# quick refreshs between each full refresh
+quick = 10
+
+[Repository example2-local]
+type = Maildir
+localfolders = ~/path/to/Maile/xample2
+# delete remote mails that were deleted locally
+sync_deletes = yes
+
+[Repository example2-remote]
+type = IMAP
+remoteport = 993
+remotehost = example2.com
+remoteuser = username@example2.com
+remotepasseval = get_passgpg("example2")
+keepalive = 60
+holdconnectionopen = yes
+# delete local mails that were deleted on the remote server
+expunge = yes
+# sync only these folders
+#folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent', 'Spam', 'Drafts']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes

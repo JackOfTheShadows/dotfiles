@@ -1,0 +1,16 @@
+#!/bin/bash
+
+STATE=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "state"|xargs|cut -d' ' -f2)
+if [ "$STATE" == "discharging" ]; then
+        TIME=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "time to empty:"|xargs|cut -d' ' -f4)
+        TIMEREP=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "time to empty:"|xargs|cut -d' ' -f5)
+        PERCENTAGE=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "percentage:"|xargs|cut -d' ' -f2)
+		echo ↯$PERCENTAGE $TIME $TIMEREP
+		#echo $STATE $PERCENTAGE $TIME $TIMEREP
+else
+        PERCENTAGE=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "percentage:"|xargs|cut -d' ' -f2)
+        TIME=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "time to full:"|xargs|cut -d' ' -f4)
+        TIMEREP=$(upower -i $(upower -e | grep '/battery') | grep --color=never -E "time to full:"|xargs|cut -d' ' -f5)
+        echo ↯$PERCENTAGE $TIME $TIMEREP
+        #echo $STATE $PERCENTAGE $TIME $TIMEREP
+fi

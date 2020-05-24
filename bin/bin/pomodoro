@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sleep 1500 && zenity --title "Pomorodo" --info --text "Time for a break!"

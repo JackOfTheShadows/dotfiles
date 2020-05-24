@@ -1,0 +1,16 @@
+# "+" substitutes for `folder`
+set mbox_type=Maildir
+set folder=$HOME/.local/Mail/example2/
+set record=+Sent
+set postponed=+Drafts
+set trash=+Trash
+set spoolfile=$HOME/.local/Mail/example2/INBOX
+set mail_check=2 # seconds
+#sidebar config
+unmailboxes *
+mailboxes = +INBOX +Sent +Drafts +Trash
+
+# smtp
+set realname='John Doe'
+set from="username@example2.com"
+set sendmail = "/usr/bin/msmtp -a example2"

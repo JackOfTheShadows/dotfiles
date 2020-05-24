@@ -1,0 +1,9 @@
+#mount ico
+mkdir -p /mnt/disk
+mount -o loop disk1.iso /mnt/disk
+
+#verify
+df -H
+
+#unmount
+sudo umount /mnt/disk/

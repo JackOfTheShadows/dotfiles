@@ -1,0 +1,45 @@
+# generate key. Algorithms:
+ssh-keygen -t rsa -b 4096
+ssh-keygen -t dsa
+ssh-keygen -t ecdsa -b 521
+ssh-keygen -t ed25519
+
+# generate key with name(-f option)
+ssh-keygen -f ~/.ssh/name -t rsa -b 4096
+
+# Copy a key
+ssh-copy-id -i ~/.ssh/name user@host
+
+#change /etc/ssh/sshd_config
+PasswordAuthentication yes -> PasswordAuthentication no
+# Port 22 -> Port number
+PermitRootLogin without-password -> PermitRootLogin No
+#MaxStartups 10:30:60 -> MaxStartups 3
+#optional
+X11Forwarding yes -> X11Forwarding no
+AllowTcpForwarding no
+#add at the end of file
+AllowUsers [user1] [user 2] ...
+
+#ssh-agent: start
+ssh-agent
+#add key
+ssh-add ~/.ssh/name
+#list keys
+ssh-agent -L
+#delte keys
+ssh-add -D
+#kill ssh agent
+kill $SSH_AGENT_PID
+
+#permission denied public key
+#server side check /var/log/auth.log for: bad ownership or modes for directory
+#on serverside:
+chmod go-w ~/
+chmod 700 ~/.ssh
+chmod 600 ~/.ssh/authorized_keys
+
+#restart ssh
+sudo service ssh restart
+sudo systemctl restart ssh
+
