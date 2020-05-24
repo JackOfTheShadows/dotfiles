@@ -1,0 +1,2 @@
+#Example
+awk '{if ($NF ~ /^:/) {gsub(":"," ",$NF); split($2, a, /]/); print "buku " substr(a[1],3)" ;; " substr($NF, 2, length($NF)-2)} else {gsub(":"," ",$NF); split($2, a, /]/); print "buku " substr(a[1],3) " ;; " substr($NF,1, length($NF)-1)}}' bookmarks.org
