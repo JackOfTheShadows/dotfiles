@@ -1,0 +1,3 @@
+#installing packages
+#source: https://unix.stackexchange.com/questions/47304/centos-install-packages-listed-in-a-text-file
+apt install $(cat requirements.txt | grep -v '^#')
