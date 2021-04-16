@@ -1,0 +1,3 @@
+#! /bin/bash
+# use keynav too
+setxkbmap -option keypad:pointerkeys

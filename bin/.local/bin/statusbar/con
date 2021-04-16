@@ -1,0 +1,24 @@
+#! /bin/bash
+
+wifi=$(nmcli con show --active | awk '$(NF-1) == "wifi" { print $1 }')
+ethernet=$(nmcli con show --active | awk '$(NF-1) == "ethernet" { print $(NF-1) }')
+
+if [ ! -z $ethernet ] && [ ! -z $wifi ]
+then
+    echo -n $ethernet " | " $wifi
+else
+    echo -n $ethernet$wifi
+fi
+
+for vpn in $(nmcli con show --active | awk '$3 == "vpn" {print $1}')
+do
+    vpn_address=$(nmcli con show $vpn | awk '$1 == "IP4.ADDRESS[1]:" {print $2}')
+    for tun in $(nmcli con show --active | awk '$(NF-1) == "tun" { print $(1) }')
+    do
+        tun_address=$(nmcli con show $tun | awk '$1 == "IP4.ADDRESS[1]:" {print $2}')
+        if [ $vpn_address = $tun_address ]
+        then
+           echo -n " | " $vpn:$tun
+        fi
+    done
+done

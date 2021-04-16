@@ -1,0 +1,2 @@
+#!/bin/bash
+chromium url --user-data-dir=$HOME/path/to/folder

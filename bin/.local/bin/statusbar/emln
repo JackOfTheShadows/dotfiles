@@ -1,0 +1,7 @@
+#!/bin/bash
+
+maildirs="$HOME/.local/Mail/*/INBOX/new/"
+ml="$(find $maildirs -type f | wc -l)"
+#ml="$(find "${XDG_DATA_HOME:-$HOME/.local/share}"/mail/*/[Ii][Nn][Bb][Oo][Xx]/new/* -type f | wc -l 2>/dev/null)"
+echo ✉:$ml
+

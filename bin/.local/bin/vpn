@@ -1,0 +1,17 @@
+#! /bin/bash
+
+vpn=$(nmcli con show | awk ' $3 == "vpn" {print $1}' | dmenu -i -p "vpn: " -l 42)
+nmcli con up $vpn
+vpn_address=$(nmcli con show $vpn | awk '$1 == "IP4.ADDRESS[1]:" {print $2}')
+for tun in $(nmcli con show --active | awk ' $3 == "tun" {print $1}')
+do
+    tun_address=$(nmcli con show $tun | awk '$1 == "IP4.ADDRESS[1]:" {print $2}')
+    if [ $vpn_address = $tun_address ]
+    then
+        sudo ufw reset
+        sudo ufw default deny incoming
+        sudo ufw default deny outgoing
+        sudo ufw allow out on $tun from any to any
+        sudo ufw enable
+    fi
+done

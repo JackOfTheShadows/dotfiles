@@ -1,0 +1,7 @@
+#!/bin/bash
+
+setxkbmap -layout "us,bg" -variant "altgr-intl, phonetic" -option "nodeadkeys"
+setxkbmap -option 'grp:ctrls_toggle'
+#setxkbmap -option ctrl:nocaps
+setxkbmap -option caps:escape
+setxkbmap -option shift:both_capslock

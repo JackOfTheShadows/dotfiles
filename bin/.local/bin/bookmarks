@@ -1,0 +1,3 @@
+#!/bin/bash
+
+xdg-open "$(cat ~/.bookmarks | sed '/^$/d' | sed '/^#/d' | sed '/^\//d' | dmenu -i -p "bookmarks: " -l 90 | xargs | cut -d' ' -f2 )"
