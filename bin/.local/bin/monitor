@@ -1,0 +1,17 @@
+#! /bin/bash
+
+#Source: https://frdmtoplay.com/i3-udev-xrandr-hotplugging-output-switching/
+
+LVDS=$(xrandr -q | grep " connected" | grep LVDS | awk '{ print $1 }')
+HDMI=$(xrandr -q | grep " connected" | grep HDMI | awk '{ print $1 }')
+
+
+if [[ $HDMI =~ ^HDMI.*$ ]]; then
+    xrandr --output $LVDS --off --output $HDMI --auto
+else
+    xrandr --output $LVDS --primary --mode 1366x768 --pos 0x0 --rotate normal
+fi
+
+for output in $(xrandr -q | grep 'disconnected' | awk '{ print $1}'); do
+    xrandr --output $output --off
+done
