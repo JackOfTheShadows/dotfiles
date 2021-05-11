@@ -136,7 +136,7 @@ timer() {
    done
 }
 
-ref_cheat {
+ref_cheat() {
     cat ~/.local/cheat/$1
 }
 
