@@ -136,6 +136,10 @@ timer() {
    done
 }
 
+ref_cheat {
+    cat ~/.local/cheat/$1
+}
+
 #mouse-shift-num() {
 #	setxkbmap -option keypad:pointerkeys
 #}
