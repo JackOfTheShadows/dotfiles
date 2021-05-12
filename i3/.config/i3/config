@@ -12,8 +12,8 @@ font pango:monospace 8
 floating_modifier $mod
 
 # start a terminal
-#bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Return exec st
+bindsym $mod+Return exec i3-sensible-terminal
+#bindsym $mod+Return exec st
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # # screen before suspend. Use loginctl lock-session to lock your screen.
@@ -56,7 +56,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
@@ -67,7 +67,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -175,9 +175,7 @@ for_window [instance="cmus"] move position center;
 for_window [instance="cmus"] scratchpad show;
 exec_always --no-startup-id "python3 ~/.config/i3/hide.py"
 bindsym $mod+n [instance="cmus"] scratchpad show
-
-# Show the first scratchpad window
-bindsym $mod+minus scratchpad show
+bindsym $mod+s [instance="cmus"] scratchpad show
 
 # move floating window
 mode "moveit" {
@@ -185,6 +183,6 @@ mode "moveit" {
     bindsym Left move left 20px
     bindsym Down move down 20px
     bindsym Right move right 20px
-    bindsym Mod4+y mode "default"
+    bindsym Escape mode "default"
 }
-bindsym $mod+m focus floating; mode "moveit"
+bindsym $mod+a focus floating; mode "moveit"
