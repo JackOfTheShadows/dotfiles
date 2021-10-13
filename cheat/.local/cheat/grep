@@ -1,0 +1,8 @@
+# Search for work in files
+grep -rnw '/path/to/somewhere/' -e 'pattern'
+    -r or -R is recursive,
+    -n is line number, and
+    -w stands for match the whole word.
+    -l (lower-case L) can be added to just give the file name of matching files.
+#Along with these, --exclude, --include, --exclude-dir flags could be used for efficient searching, example:
+	-grep --include=\*.{c,h} -rnw '/path/to/somewhere/' -e "pattern"

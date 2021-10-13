@@ -1,0 +1,62 @@
+# Installation
+# suport virtualisation
+egrep -c '(vmx|svm)' /proc/cpuinfo
+sudo kvm-ok
+sudo apt install cpu-checker # if kvm-ok not installed
+#Installation
+sudo apt-get install qemu-kvm qemu (libvrt-bin???)
+
+
+# Create an image 
+
+qemu-img create Image.img 10G
+# Create an image with qemu default format:
+qemu-img create -f qcow2 Image.img 10G
+-f  First image format
+
+# Install system
+
+qemu-system-x86_64 -enable-kvm -cdrom OS_ISO.iso -boot menu=on -drive file=Image.img -m 2G
+-enable-kvm enables KVM
+-cdrom selects an iso to load as a cd
+-boot menu=on enables a boot menu can use -boot d for boot from CD-ROM
+-drive file= selects a file for the drive or use -hda Image.img (file as hard disk 0)
+-m sets the amount of dedicated RAM)
+(Remember! Ctrl + Alt + G to exit capture, Ctrl + Alt + F to fullscreen!)
+
+#Options
+-net nic -net user: enable an Ethernet Internet connection 
+-nographic: disable gui
+-drive file=ssh://example@example.com/disk.img user remote image
+-soundhw all enable all sound
+
+# Performance options
+-cpu host (sets the CPU to the hosts' CPU)
+-smp 2 (sets the numbers of cores)
+
+#Basic Graphics Acceleration
+the -vga option can be used to specify one of various vga card emulators:
+"qxl" offers 2D acceleration but requires kernel modules "qxl" and "bochs_drm" to be enabled:
+"sudo modprove qxl bochs_drm"
+-vga qxl
+"virtio" works much better and supports some 3D emulation:
+-vga virtio -display sdl,gl=on
+
+# MOunt image on the host
+# Source: https://en.wikibooks.org/wiki/QEMU/Images#Mounting_an_image_on_the_host
+mount -o loop,offset=32256 /path/to/image.img /mnt/mountpoint
+#To determine offset:
+fdisk -l /path/to/image.img
+# and the offset you need is the start of a partition multiplied by sector size. For example if start is 128 and sector size is 512 then the offset is 65536. 
+
+#Pass wifi dongle
+#Add rule
+#Sources: https://github.com/aguegu/stm8demos/blob/master/README.md#troubleshooting
+# https://askubuntu.com/questions/526962/libusb-couldnt-open-usb-device-dev-bus-usb-002-006-permission-denied-libusb
+# https://www.linuxquestions.org/questions/slackware-14/trying-to-wrestle-with-usb-permissions-and-passing-through-devices-qemu-vms-4175672319/
+# https://www.linuxquestions.org/questions/linux-virtualization-and-cloud-90/give-qemus-guest-win-xp-usb-access-4175604510-print/
+# https://www.linuxquestions.org/questions/slackware-14/problem-passing-through-usb-devices-in-qemu-4175492519/
+# https://unix.stackexchange.com/questions/452934/can-i-pass-through-a-usb-port-via-qemu-command-line
+# https://github.com/ceph/qemu-kvm/blob/master/docs/usb2.txt
+
+-device usb-ehci,id=ehci -device usb-host,bus=ehci.0,vendorid=0xxxxx,productid=0xxxxx

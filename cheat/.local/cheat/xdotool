@@ -1,0 +1,2 @@
+# example for controling a window
+xdotool key --window "$(xdotool search --class mpv)" space

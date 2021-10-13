@@ -1,0 +1,34 @@
+# Dump a LUKS Header
+cryptsetup luksDump /dev/sdb2
+
+# Add a Backup Key
+cryptsetup luksAddKey --key-slot 1 /dev/sdb2
+
+# Change or Remove a Key
+cryptsetup luksRemoveKey /dev/sdb2
+
+# Backup a LUKS Header
+cryptsetup luksHeaderBackup <device> --header-backup-file <file>
+# cryptsetup luksHeaderBackup /dev/sdb2 --header-backup-file /root/sdb2-header.backup
+
+# Resore a LUKS Header
+cryptsetup luksHeaderRestore <device> --header-backup-file <file>
+
+# Securely Erase a LUKS Header
+cryptsetup -v isLuks /dev/sdb2
+
+##CREATE USB
+umount /dev/sdX1
+# Wipe filesystem from the USB
+sudo wipefs -a /dev/sdX1
+# Create a LUKS partition
+sudo cryptsetup luksFormat /dev/sdX1
+# Open the encrypted drive
+sudo cryptsetup luksOpen /dev/sdX1 reddrive
+ls -l /dev/mapper/reddrive 
+# Create a filesystem
+sudo mkfs.ext4 /dev/mapper/reddrive -L reddrive
+# Using the encrypted USB
+sudo mount /dev/mapper/reddrive /mnt/red
+sudo umount /mnt/red
+sudo cryptsetup luksClose reddrive

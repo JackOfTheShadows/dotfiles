@@ -1,0 +1,8 @@
+# update sources
+sudo freshclam
+
+# scan and print infected files
+clamscan -r --bell -i /home/bin/Downloads
+
+# scan whole system
+clamscan -r --remove /

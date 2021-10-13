@@ -1,0 +1,2 @@
+# clean windows cache
+sudo ntfsfix /dev/sdXY

@@ -1,0 +1,63 @@
+# Reset repo to master, loose all uncommited changes
+
+# Revert changes to modified files.
+git reset --hard
+
+# Remove all untracked files and directories. (`-f` is `force`, `-d` is `remove directories`)
+git clean -fd
+
+# List branches
+git branch --all
+
+# Create new branch and switch to it
+git checkout -b newBranch
+
+# merge
+git chekcout master
+git merge branchName
+
+# merge better
+git checkout test
+git pull origin master
+git checkout master
+git merge test
+
+#Clear Git History
+#Source: https://www.shellhacks.com/git-remove-all-commits-clear-git-history-local-remote/
+git checkout --orphan temp_branch #create and checkout branch
+git add -A 
+git commit -am "The first commit"
+git branch -D master #delete master
+git branch -m master #rename current to master
+git push -f origin master #forecefully update the remote repository
+
+#reset one file
+git checkout HEAD -- name.file
+
+#delete a branch
+git branch -d branch_name
+git branch -D branch_name
+# for remote branch use one of the following
+git push origin :the_remote_branch
+git push origin --delete the_remote_branch
+
+# Add changes to old commit
+git stash
+git rebase -i HEAD~10 #number of commits
+edit <commit>
+git stash pop
+git add <file>
+git commit --amend --no-edit
+git rebase --continue
+git push --force-with-lease #if needed
+
+# Rebase to master
+git checkout master
+git pull
+git checkout dev-branch
+git rebase master
+git push origin :dev-branch && git push -u
+
+# Squash commits
+git rebase -i HEAD~number_of_commits
+# add squash to the commits you are squashing

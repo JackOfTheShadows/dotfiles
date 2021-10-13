@@ -1,0 +1,35 @@
+#rsync with deleteing files
+rsync -avh origin/ target/ --delete
+
+#in case of IO error encountered - wkipping file deletion
+rsync -avh origin/ target/ --delete --ignore-errors
+
+# for a dry run use --dry-run
+rsync -avh origin/ target/ --dry-run
+
+# -a: archive
+# archive:
+#    -r, --recursive recurse into directories
+#
+#    -l, --links copy symlinks as symlinks
+#
+#    -p, --perms preserve permissions
+#
+#    -t, --times preserve modification times
+#
+#    -g, --group preserve group
+#
+#    -o, --owner preserve owner (super-user only)
+#
+#    -D same as --devices --specials
+#
+#    --devices preserve device files (super-user only)
+#
+#    --specials preserve special files
+#
+# -v: verbose
+# -h: human readable
+# -z: --compress compress file data during the transfer
+
+# show progress
+--info=progress2

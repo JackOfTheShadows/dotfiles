@@ -1,0 +1,7 @@
+# Install a package
+sudo dpkg -i DEB_PACKAGE
+# If dependency not met:
+sudo apt-get install -f
+
+# Uninstall a package
+sudo dpkg -r PACKAGE_NAME

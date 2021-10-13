@@ -1,0 +1,26 @@
+### pdftk
+
+# Concatenate all pdf files into one:
+pdftk *.pdf cat output all.pdf
+
+# Concatenate specific pdf files into one:
+pdftk 1.pdf 2.pdf 3.pdf cat output 123.pdf
+
+# Concatenate pages 1 to 5 of first.pdf with page 3 of second.pdf
+pdftk A=fist.pdf B=second.pdf cat A1-5 B3 output new.pdf
+
+### pdfunite
+
+# Can be installed through poppler-utils
+# Merge pdf
+pdfunite file1.pdf file2.pdf merged_output.pdf
+#Can be installed through poppler-utils
+
+### qpdf
+
+# If you wanted pages 1 through 5 from infile.pdf but you wanted the rest of the metadata to be dropped, you could instead run
+qpdf --empty --pages infile.pdf 1-5 -- outfile.pdf
+
+# This preserves all metadata associated with that file.
+qpdf input.pdf --pages . 1-10 -- output.pdf
+

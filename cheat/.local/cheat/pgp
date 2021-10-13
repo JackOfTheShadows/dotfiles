@@ -1,0 +1,19 @@
+# generate key
+gpg --gen-key
+
+# ecrypt passwords in file
+echo "prime" | gpg -e -r foo@bar.com > ~/.passwd
+
+# with new line
+printf "prime\nprime" | gpg -e -r foo@bar.com > ~/.passwd
+printf 'prime\nprime' | gpg -e -r foo@bar.com > ~/.passwd
+
+#Export keys : sourse: https://access.redhat.com/solutions/2115511
+gpg -a --export >mypubkeys.asc
+gpg -a --export-secret-keys >myprivatekeys.asc
+
+#Import keys
+gpg --import myprivatekeys.asc
+gpg --import mypubkeys.asc
+gpg -K
+gpg -k

@@ -1,0 +1,61 @@
+## LOOPS:
+
+for file in *;
+do
+    echo $file found;
+done
+
+while [ $counter -le 10 ]
+do
+echo $counter
+    ((counter++))
+done
+
+## LOGIC
+
+case "$1"
+in
+    0) echo "zero found";;
+    1*) echo "something beginning with 3 found";;
+esac
+
+if [ condition ]
+then
+    statement
+elif [ $2 == 'yes' ]
+then
+    statement
+else
+    statement
+fi
+
+# Turn on debugging:
+set -x
+
+# Turn off debugging:
+set +x
+
+# Retrieve N-th piped command exit status
+printf 'foo' | fgrep 'foo' | sed 's/foo/bar/'
+echo ${PIPESTATUS[0]}  # replace 0 with N
+
+# Lock file:
+( set -o noclobber; echo > my.lock ) || echo 'Failed to create lock file'
+
+# involke a new shell as root:
+sudo -sh -c 'cat someFile >> newFile'
+
+# Script Special Variables
+$0 - The name of the Bash script.
+$1 - $9 - The first 9 arguments to the Bash script. (As mentioned above.)
+$# - How many arguments were passed to the Bash script.
+$@ - All the arguments supplied to the Bash script.
+$? - The exit status of the most recently run process.
+$$ - The process ID of the current script.
+$USER - The username of the user running the script.
+$HOSTNAME - The hostname of the machine the script is running on.
+$SECONDS - The number of seconds since the script was started.
+$RANDOM - Returns a different random number each time is it referred to.
+$LINENO - Returns the current line number in the Bash script.
+
+# " allows substitution; ' does not

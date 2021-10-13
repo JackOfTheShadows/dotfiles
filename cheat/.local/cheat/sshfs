@@ -1,0 +1,17 @@
+# create dir
+mkdir folder
+
+# connect to system
+sshfs remote-user@remote.server:/remote/directory createdFolder
+
+# unmount folder
+sudo umount pathtofolder
+
+# Permanently Mounting the Remote File System
+sudo nano /etc/fstab
+sshfs#user@xxx.xxx.xxx.xxx:/remote/directory createdFolder
+
+# source
+# https://www.digitalocean.com/community/tutorials/how-to-use-sshfs-to-mount-remote-file-systems-over-ssh
+# https://ubuntuforums.org/archive/index.php/t-275856.html
+# http://www.debianadmin.com/mount-a-remote-file-system-through-ssh-using-sshfs.html
