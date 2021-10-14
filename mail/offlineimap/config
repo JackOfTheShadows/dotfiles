@@ -1,0 +1,35 @@
+[general]
+#ui = ttyui
+accounts = id_example
+maxsyncaccounts = 3
+# Path to file with arbitrary Python code to be loaded
+pythonfile = ~/.config/offlineimap/offlineimap.py
+
+[Account id_example]
+localrepository = id_example-local
+remoterepository = id_example-remote
+# full refresh, in min
+autorefresh = 0.5
+# quick refreshs between each full refresh
+quick = 10
+
+[Repository id_example-local]
+type = Maildir
+localfolders = ~/.local/Mail/example
+# delete remote mails that were deleted locally
+sync_deletes = yes
+
+[Repository id_example-remote]
+type = IMAP
+remoteport = 993
+remotehost = imap.example.com
+remoteuser = example@example.com
+remotepasseval = get_passgpg("id_example")
+keepalive = 60
+holdconnectionopen = yes
+# delete local mails that were deleted on the remote server
+expunge = yes
+# sync only these folders
+#folderfilter = lambda foldername: foldername in ['INBOX', 'Archive', 'Sent', 'Spam', 'Drafts']
+sslcacertfile = /etc/ssl/certs/ca-certificates.crt
+ssl = yes
